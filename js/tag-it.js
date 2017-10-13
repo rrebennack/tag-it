@@ -413,11 +413,11 @@
 
             if ( value )
             {
-                this.tagInput.attr('disabled', 'disabled');
+                this.tagInput.hide();
             }
             else
             {
-                this.tagInput.removeAttr('disabled');
+                this.tagInput.show();
             }
 
             let tags = this.assignedTags();
@@ -426,7 +426,7 @@
 
             for ( var xlp = 0; xlp < tags.length; xlp++ )
             {
-                this.createTag(tags[xlp]);
+                this.createTag(tags[xlp], null, true);
             }
         },
         assignedTags: function()
@@ -545,7 +545,7 @@
                 {
                     if ( this._effectExists('highlight') )
                     {
-                        existingTag.effect('highlight');
+                        existingTag.effect("pulsate", { times: 3 }, 2000);
                     }
                 }
                 return false;
