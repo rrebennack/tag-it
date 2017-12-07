@@ -1,7 +1,7 @@
 /** @license
  * jQuery UI Tag-it!
  *
- * @version v2.1 (08/2017)
+ * @version v2.1.1 (08/2017)
  *
  * Copyright 2011, Levy Carneiro Jr.
  * Released under the MIT license.
@@ -27,6 +27,7 @@
 (function($)
 {
     $.widget('ui.tagit', {
+
         options: {
             allowDuplicates: false,
             caseSensitive: true,
@@ -407,6 +408,17 @@
         {
             return this.tagList.find('.tagit-choice:not(.removed)');
         },
+        visible: function(value)
+        {
+            if ( value )
+            {
+                this.tagList.show();
+            }
+            else
+            {
+                this.tagList.hide();
+            }
+        },
         readOnly: function(value)
         {
             this.options.readOnly = value;
@@ -643,10 +655,12 @@
             {
                 var tags = this.assignedTags();
                 var removedTagLabel = this.tagLabel(tag);
+
                 tags = $.grep(tags, function (el)
                 {
                     return el != removedTagLabel;
                 });
+
                 this._updateSingleTagsField(tags);
             }
 
@@ -682,7 +696,6 @@
         },
         removeAll: function ()
         {
-            // Removes all tags.
             var that = this;
             this._tags().each(function (index, tag)
             {
